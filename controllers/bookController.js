@@ -229,11 +229,11 @@ exports.book_delete_post = (req, res) => {
     async.parallel(
         {
             book(callback) {
-                Book.findById(req.body.bookid).exec(callback)
+                Book.findById(req.body.id).exec(callback)
             },
         },
         (err, results) => {
-            Book.findByIdAndRemove(req.body.bookid, (err) => {
+            Book.findByIdAndRemove(req.body.id, (err) => {
                 res.redirect("/catalog/books")
             })
         }

@@ -142,7 +142,7 @@ exports.bookinstance_delete_post = (req, res) => {
     async.parallel(
         {
             bookinstance(callback) {
-                BookInstance.findById(req.body.bookinstanceid).exec(callback)
+                BookInstance.findById(req.body.id).exec(callback)
             }
         },
         (err, results) => {
