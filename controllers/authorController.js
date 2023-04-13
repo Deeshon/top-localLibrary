@@ -151,10 +151,32 @@ exports.author_delete_post = (req, res, next) => {
   
 // Display Author update form on GET.
 exports.author_update_get = (req, res) => {
-  res.send("NOT IMPLEMENTED: Author update GET");
+    async.parallel(
+      {
+        author(callback) {
+          Author.findById(req.params.id).exec(callback)
+        }
+      },
+      (err, results) => {
+        res.render("author_form", {
+          title: "Update Author",
+          author: results.author
+        })
+      }
+    )
 };
 
 // Handle Author update on POST.
 exports.author_update_post = (req, res) => {
-  res.send("NOT IMPLEMENTED: Author update POST");
+    const author = new Author({
+      first_name: req.body.first_name,
+      family_name: req.body.family_name,
+      date_of_birth: req.body.date_of_birth,
+      date_of_death: req.body.date_of_death,
+      _id: req.params.id,
+    })
+
+    Author.findByIdAndUpdate(req.params.id, author, {}, (err, theauthor) => {
+        res.redirect("/catalog/authors")
+    })
 };

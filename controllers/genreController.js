@@ -133,10 +133,34 @@ exports.genre_delete_post = (req, res) => {
 
 // Display Genre update form on GET.
 exports.genre_update_get = (req, res) => {
-  res.send("NOT IMPLEMENTED: Genre update GET");
+  async.parallel(
+    {
+      genre(callback) {
+        Genre.findById(req.params.id).exec(callback)
+      }
+    },
+    (err, results) => {
+      res.render("genre_form", {
+        title: "Update Genre",
+        genre: results.genre
+      })
+    }
+  )
 };
 
 // Handle Genre update on POST.
 exports.genre_update_post = (req, res) => {
-  res.send("NOT IMPLEMENTED: Genre update POST");
+  const genre = new Genre({
+    name: req.body.name,
+    _id: req.params.id,
+  })
+
+  Genre.findByIdAndUpdate(
+    req.params.id, 
+    genre,
+    {},
+    (err, thegenre) => {
+      res.redirect(thegenre.url)
+    }
+    )
 };

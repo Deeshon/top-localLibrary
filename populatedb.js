@@ -88,8 +88,26 @@ console.log(
     console.log("Adding genres");
     await Promise.all([
       genreCreate("Fantasy"),
-      genreCreate("Science Fiction"),
+      genreCreate("Adventure"),
       genreCreate("French Poetry"),
+      genreCreate("Contemporary"),
+      genreCreate("Dystopian"),
+      genreCreate("Mystery"),
+      genreCreate("Horror"),
+      genreCreate("Thriller"),
+      genreCreate("Paranomal"),
+      genreCreate("Children's"),
+      genreCreate("Memoir"),
+      genreCreate("Cookbook"),
+      genreCreate("Art"),
+      genreCreate("Self-help"),
+      genreCreate("Development"),
+      genreCreate("Motivational"),
+      genreCreate("Health"),
+      genreCreate("Travel"),
+      genreCreate("Guide/ How-to"),
+      genreCreate("Families & Relationships"),
+      genreCreate("Humor"),
     ]);
   }
   
@@ -100,7 +118,9 @@ console.log(
       authorCreate("Ben", "Bova", "1932-11-8", false),
       authorCreate("Isaac", "Asimov", "1920-01-02", "1992-04-06"),
       authorCreate("Bob", "Billings", false, false),
-      authorCreate("Jim", "Jones", "1971-12-16", false),
+      authorCreate("Bertus", "Aafjes", "1914-12-16", "1999-01-06"),
+      authorCreate("Hans", "Aanrud", "1863-11-06", "1953-12-23"),
+      authorCreate("Verna", "Aderma", "1938-12-16", false),
     ]);
   }
   

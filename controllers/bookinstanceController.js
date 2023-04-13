@@ -155,10 +155,41 @@ exports.bookinstance_delete_post = (req, res) => {
 
 // Display BookInstance update form on GET.
 exports.bookinstance_update_get = (req, res) => {
-  res.send("NOT IMPLEMENTED: BookInstance update GET");
+    async.parallel(
+      {
+        bookinstance(callback) {
+          BookInstance.findById(req.params.id)
+          .populate("book")
+          .exec(callback)
+        },
+
+      },
+      (err, results) => {
+        res.render("bookinstance_update", {
+          title: "Update BookInstance",
+          bookinstance:results.bookinstance,
+          book: results.bookinstance.book
+        })
+      }
+    )
 };
 
 // Handle bookinstance update on POST.
 exports.bookinstance_update_post = (req, res) => {
-  res.send("NOT IMPLEMENTED: BookInstance update POST");
+  const bookinstance = new BookInstance({
+    book: req.body.book,
+    imprint: req.body.imprint,
+    status: req.body.status,
+    due_back: req.body.due_back,
+    _id: req.params.id
+  })
+
+  BookInstance.findByIdAndUpdate(
+    req.params.id,
+    bookinstance,
+    {},
+    (err, thebookinstance) => {
+      res.redirect(thebookinstance.url)
+    }
+  )
 };
